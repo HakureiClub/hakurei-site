@@ -16,7 +16,7 @@ async def login_manger(request):
     the_token = request.cookies.get('github_token')
     if not the_cookie == None or not the_token == None :
         code = await getuser.getorg(the_cookie,the_token)
-        if not code == 200 or code == 403 : 
+        if not code == 200 : 
             return text('你沒有權限噢')
     else:
         res = html('Redirect',status = 302)
@@ -40,6 +40,16 @@ async def adminindex(request):
 
 
 
+@admincp.route('/delev/<name>')
+async def delev(request,name):
+    if await login_manger(request) == None:
+        acti.remove(name)
+        res = html('Redirect',status = 302)
+        res.headers['Location'] = '/admin'
+        return res 
+    return await login_manger(request)
+    
+
 @admincp.route('/new-post')
 async def adminindex(request):
     if await login_manger(request) == None:
@@ -58,6 +68,8 @@ async def add_event(request):
             time = request.form.get('time')
             place = request.form.get('place')
             acti.init(name,time,place)
-            return render_template('admin/index.html')
+            res = html('Redirect',status = 302)
+            res.headers['Location'] = '/admin'
+            return res 
     return await login_manger(request)
 

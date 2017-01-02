@@ -56,6 +56,12 @@ class ActiInfo:
                 }
         self.acti.insert_one(raw)
         return True
+
+    def remove(self,name):
+        self.acti.remove({'name':urllib.request.unquote(name)})
+        return True
+
+    
     def all(self):
         return self.acti.find()
 
