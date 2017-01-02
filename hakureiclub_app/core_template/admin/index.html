@@ -48,7 +48,7 @@
 							 {% for x in allev %}
 							 <tr>
 								 <td>{{x.get('name')}}</td>
-								 <td>{{x.get('time')}}</td>
+								 <td>{{x.get('time').strftime('%Y.%m.%d')}}</td>
 								 <td>{{x.get('place')}}</td>
 								 <td><input type="button" class ="ui small button" onclick="location.href='/admin/delev/{{x.get('name')}}'" value="刪除"></input></td>
 							 </tr>

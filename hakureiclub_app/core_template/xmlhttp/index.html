@@ -11,7 +11,7 @@
 				近期參予場次資訊  
 			</div>
 			{%for newest in newest %}
-			<p>{{newest.name}} - {{newest.time}} @ {{newest.place}}</p>
+			<p>{{newest.name}} - {{newest.time.strftime('%Y.%m.%d')}} @ {{newest.place}}</p>
 			{%endfor%}
 		</div>
 	</div>
