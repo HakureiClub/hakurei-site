@@ -46,7 +46,7 @@ class ActiInfo:
     
     def init(self,name,time,place):
         time = datetime.datetime.strptime(time,"%Y.%m.%d")
-        expiretime = datetime.datetime.strptime(time,"%Y.%m.%d") + datetime.timedelta(days=1)
+        expiretime = time + datetime.timedelta(days=1)
         self.acti.create_index('expiretime',expireAfterSeconds=0)
         raw = {
                 "expiretime":expiretime,
