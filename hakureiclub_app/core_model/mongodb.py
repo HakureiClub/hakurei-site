@@ -11,7 +11,7 @@ class BlogInfo:
         self.blog = db['BlogInfo']
     def init(self,title,markdown):
         self.blog.create_index("url", unique=True)
-        url = pin.get_pinyin(str(title).replace('-',''))
+        url = pin.get_pinyin(str(title).replace('-','').replace(' ',''))
         raw = {
                 "url":url,
                 "title":title,
@@ -21,6 +21,10 @@ class BlogInfo:
         return True
     def new8th(self):
         return self.blog.find().sort('$natural',-1).limit(7)
+    
+    def all(self):
+        return self.blog.find()
+    
     def find(self,url):
         return self.blog.find_one({'url':urllib.request.unquote(url)})
 

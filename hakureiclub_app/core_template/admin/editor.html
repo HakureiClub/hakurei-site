@@ -47,19 +47,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			</tbody>
-		</table>
-	</div>
-	<div class="ui tab" data-tab="posted">
-		<table id="markedtitle" class="ui definition celled right aligned table">
-			<thead>
+				{%for blog in blog%}
 				<tr>
-					<th>佇列</th>
-					<th>檔案名稱</th>	
-					<th>刪除文章</th>	
+					<td>{{loop.index}}</td>
+					<td>{{blog.title}}</td>
+					<td></td>
 				</tr>
-			</thead>
-			<tbody>
+				{%endfor%}
 			</tbody>
 		</table>
 	</div>
