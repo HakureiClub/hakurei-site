@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from xpinyin import Pinyin
 from mu_sanic import config
 import urllib.request
+import  datetime
 client = MongoClient(config.mongohost)
 db = client['Hakurei-Site']
 pin = Pinyin()
@@ -44,6 +45,7 @@ class ActiInfo:
         self.acti = db['ActiInfo']
     
     def init(self,name,time,place):
+        time = datetime.datetime.strptime(time,"%Y.%m.%d")
         raw = {
                 "name":name,
                 "time":time,
