@@ -19,7 +19,7 @@ async def goauth(request):
     resp.cookies['github_login']['path'] = '/'
     resp.cookies['github_token']['path'] = '/'
     resp.cookies['github_login']['expires'] = datetime.now() + timedelta(seconds=30)
-    resp.cookies['github_token']['path'] = '/'
+    resp.cookies['github_token']['expires'] = datetime.now() + timedelta(seconds=30)
     return resp
     
 
