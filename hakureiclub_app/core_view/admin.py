@@ -45,7 +45,7 @@ async def delev(request,name):
     if await login_manger(request) == None:
         acti.remove(name)
         res = html('Redirect',status = 302)
-        res.headers['Location'] = '/admin'
+        res.headers['Location'] = '/admin/'
         return res 
     return await login_manger(request)
     
@@ -69,7 +69,7 @@ async def add_event(request):
             place = request.form.get('place')
             acti.init(name,time,place)
             res = html('Redirect',status = 302)
-            res.headers['Location'] = '/admin'
+            res.headers['Location'] = '/admin/'
             return res 
     return await login_manger(request)
 
