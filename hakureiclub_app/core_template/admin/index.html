@@ -1,0 +1,62 @@
+{% extends "admin/pbase.html"%}
+{%block title%} Admin {%endblock%}
+{% block text %}
+
+<a class="ui green right ribbon label">0MuCMS | Admin-Panel</a>
+<div class="ui secondary pointing menu">
+						 <a class="item active" data-tab="list">
+							 預訂參加清單
+						 </a>
+						 <a class="item" href="/admin/editor">
+							 編輯器
+						 </a>
+					 </div>
+					<div class="ui tab active">
+			<form id="bck" class="createtable" method="post" action="/admin/add_event">
+						<div class="ui grid">
+			<div class="twelve wide column">
+			<div class="ui right labeled fluid input">
+				<input class="form-control" type="text" name="name"  placeholder="ex:FF28"><br>
+				<a class="ui tag label" id="basic-addon3">場次名稱</a>
+			</div></br>
+			<div class="ui right labeled fluid input">
+				<input class="form-control" type="text" name="time" placeholder="2016.6.7-6.8"><br>
+				<a class="ui tag label" id="basic-addon3">日期</a>
+			</div><br/>
+			<div class="ui right labeled fluid input">
+				<input class="form-control" type="text" name="place" placeholder="臺北花博"><br>
+				<a class="ui tag label" id="basic-addon3">位置</a>
+			</div>
+			</div>
+
+			<div class="four wide column">
+			<div class="ui right floated  buttons">
+			  	<button id="login" type="submit" class="ui positive button">提交</button>
+			</div>  
+			</div>
+			</div>
+		</form>		
+		<div class="ui divider"></div>
+					 	 <table class="ui definition celled right aligned table">
+							 <thead>
+							 <tr>
+		 						 <th>場次</th>
+		 						 <th>日期</th>		
+		 						 <th>地點</th>		
+								 <th>刪除</th>	
+							 </tr>
+							 {% for x in allev %}
+							 <tr>
+								 <td>{{x.get('name')}}</td>
+								 <td>{{x.get('time')}}</td>
+								 <td>{{x.get('place')}}</td>
+								 <td><input type="button" class ="ui small button" onclick="location.href='/admin/delev/{{x.get('name')}}'" value="刪除"></input></td>
+							 </tr>
+							 {% endfor %}
+							 </thead>
+							 <tbody>
+							 </tbody>
+				 			 </table>
+					</div>
+
+{% endblock %}

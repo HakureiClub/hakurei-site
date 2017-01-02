@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block head %}
+		<meta charset='utf-8' />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<title>羽天珼岸 HakureiWings</title>
+		{% endblock %}  
+	</head>
+	<body style="background:#FFFFFF;">
+		<div id="canvasBubbles" style="z-index:-999;position:absolute; height:99.6%; width:100%"></div>
+		<img id = "run"  style="z-index:-11; position: absolute; left: -70px; bottom: 0px; height:45%;"  src="/static/img/pic.png"></img>
+
+		<div class= "ui container" style="z-index:1;background:#fff; padding-top:1%; height:100%;border-top-width: 0px;border-bottom-width: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;" >
+
+			<div class ="ui grid" style="height:60%; margin: -14px 0px -14px 0px;  position: relative;">
+				<a href="/"><img class="ui rounded image" style="position: absolute; width:100%; left:0px; height:100%; padding:0px; object-fit: cover; object-position: center;" src="/static/img/hana00.jpg"></a>
+				<div style="position: absolute; bottom:0px; text-align:right; padding:0px; right:0px; background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%); background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%); background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff',endColorstr='#ffffff',GradientType=1); width:100%;"><a href="/"><img src="/static/img/logo.png" style="width:25%;"></a></div>
+			</div>
+			<div class ="ui grid" style="height:38.5%; margin-left:0px; margin-right:0px; ">
+				<div class ="thirteen wide column" style="padding:10px 0px 3% 0px">
+					<div style="height:100%;">
+						{% block content %}{% endblock %}
+					</div>
+				</div>
+				<div class="three wide column" style="padding-right:0px;">
+					<div class="ui vertical fluid right tabular menu" style="height:100%;">  
+						<a id="event" class="item {% block index %}{% endblock %}" href="javascript:go('/xhttp/event','event');">
+							<i style="padding-right:5px;" class="info icon"></i>近期資訊
+						</a>
+						<a id="member" class="item {% block member %}{% endblock %}" href="javascript:go('/xhttp/member','member');">
+							<i style="padding-right:5px;"  class="users icon"></i>成員介紹
+						</a>
+						<a id="illust" class="item {% block draw %}{% endblock %}" href="javascript:go('/xhttp/illust','illust');">
+							<i style="padding-right:5px;"  class="paint brush icon"></i>繪師專區
+						</a>
+						<a class="item {% block fb %}{% endblock %}" href="https://www.facebook.com/HakureiWing/">
+							<i style="padding-right:5px;"  class="facebook icon"></i>粉絲專頁
+						</a>
+						<a class="item {% block card %}{% endblock %}" href="https://wing.hakurei.club">
+							<i style="padding-right:5px;"  class="shop icon"></i>通販購買
+						</a>
+						<a class="item {% block contact %}{% endblock %}" href="mailto:contact@hakurei.club">
+							<i style="padding-right:5px;"  class="mail outline icon"></i>聯絡我們
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="ui horizontal divider header" style="font-size: 1em; height:4%;padding-top:1.5%; padding-bottom:1%; margin:0px; width:100%;">
+				<i class="fa fa-copyright"></i> 2016-2017 羽天珼岸 / Illust: 夢築 / 0muCMS
+			</div>
+		</div>
+		<script src="/static/js/bubbles.js"></script>
+		<script>
+bubblesMain(new Object({
+	type : 'radial',
+	revolve : 'center',
+	minSpeed : 60,
+	maxSpeed : 60,
+	minSize : 15,
+	maxSize : 80,
+	num : 160,
+	opacity:0.18,
+	colors : new Array('#FFFFFF','#6E6EFF','#0000E0','#C26EFF','#59FFFF')
+}));
+function go(html,classn)
+{
+	var htmlclass = document.getElementById(classn);
+	var xmlHttp = new XMLHttpRequest();
+	var content_div = document.getElementById('content');
+	var eventt = document.getElementById('event')
+		var illust = document.getElementById('illust')
+		var member = document.getElementById('member')
+		xmlHttp.onreadystatechange = function() {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			{
+				content_div.innerHTML = xmlHttp.responseText;
+			}
+		};
+	eventt.className = "item";
+	illust.className = "item";
+	member.className = "item";
+	htmlclass.className = "item active";
+	xmlHttp.withCredentials = true;
+	start = new Date().getTime();
+	xmlHttp.open("GET", html , true); 
+	xmlHttp.send(null);
+}
+		</script>
+		{% block script %}
+		{% endblock %}
+	</body>
+</html>
