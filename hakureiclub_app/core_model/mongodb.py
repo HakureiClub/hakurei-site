@@ -22,6 +22,7 @@ class BlogInfo:
         return self.blog.find().sort('$natural',-1).limit(7)
     def find(self,url):
         return self.blog.find_one({'url':urllib.request.unquote(url)})
+
 class AuthInfo:
     def __init__(self):
         self.authi = db['authInfo']
@@ -54,4 +55,4 @@ class ActiInfo:
         return self.acti.find()
 
     def newest(self):
-        return self.acti.find().sort('$natural',-1).limit(1)
+        return self.acti.find().sort('time',1).limit(1)
