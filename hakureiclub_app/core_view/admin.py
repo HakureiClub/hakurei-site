@@ -33,7 +33,7 @@ async def adminindex(request):
 
 
 @admincp.route('/editor')
-async def adminindex(request,name):
+async def adminindex(request):
     if await login_manger(request) == None:
         blogpost = blog.all()
         return render_template('admin/editor.html',**locals())
