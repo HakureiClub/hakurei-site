@@ -32,11 +32,15 @@ async def adminindex(request):
     return await login_manger(request)
 
 
-@admincp.route('/editor')
-async def adminindex(request):
+@admincp.route('/editor/<name>')
+async def adminindex(request,name):
     if await login_manger(request) == None:
-        blogpost = blog.all()
-        return render_template('admin/editor.html',**locals())
+        if name == "":
+            blogpost = blog.all()
+            return render_template('admin/editor.html',**locals())
+        else:
+            blogpost = blog.all()
+            return render_template('admin/editor.html',**locals())
     return await login_manger(request)
 
 
@@ -56,10 +60,9 @@ async def adminindex(request):
     if await login_manger(request) == None:
         if request.method == 'POST' :
             title = request.form.get('title')
-            blog.init(title,markdown2.markdown(str(request.form.get('markdown'))))
+            blog.init(title,str(request.form.get('markdown')))
             return text('OK')
     return await login_manger(request)
-
 
 @admincp.route('/add_event')
 async def add_event(request):
