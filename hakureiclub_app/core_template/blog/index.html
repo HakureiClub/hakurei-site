@@ -13,13 +13,13 @@
 		<i class="empty moon icon"></i>
 		<div class="content">
 			<div class="header">
-				{{blogcontent['title'] }}
+				{{blogtitle}}
 			</div>
 		</div>
 	</div>
 	<br>
 	<div class="our" style="overflow:auto; height:87%;">
-		{{blogcontent['markdown']|safe }}
+		{{blogcontent|safe}}
 	</div>
 </div>
 {% endblock %}
