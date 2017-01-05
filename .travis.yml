@@ -15,4 +15,4 @@ notifications:
         on_success: always
         on_failure: always
         
-script: py.test
+script: make test
