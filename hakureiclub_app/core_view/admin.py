@@ -35,10 +35,20 @@ async def adminindex(request):
 @admincp.route('/editor')
 async def adminindex(request):
     if await login_manger(request) == None:
+        blogtitle = 'nopost'
         blogpost = blog.all()
         return render_template('admin/editor.html',**locals())
     return await login_manger(request)
 
+
+@admincp.route('/edit/<posted>')
+async def adminindex(request,posted):
+    if await login_manger(request) == None:
+        blogpost = blog.all()
+        blogcontent = blog.find(posted)['markdown']
+        blogtitle = blog.find(posted)['title']
+        return render_template('admin/editor.html',**locals())
+    return await login_manger(request)
 
 
 @admincp.route('/delev/<name>')

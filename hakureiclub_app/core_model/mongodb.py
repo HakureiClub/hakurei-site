@@ -9,6 +9,7 @@ pin = Pinyin()
 class BlogInfo:
     def __init__(self):
         self.blog = db['BlogInfo']
+
     def init(self,title,markdown):
         self.blog.create_index("url", unique=True)
         url = pin.get_pinyin(str(title).replace('-','').replace(' ',''))
@@ -17,8 +18,9 @@ class BlogInfo:
                 "title":title,
                 "markdown":markdown
                 }
-        self.blog.insert_one(raw)
+        self.blog.update_one({"url":url},{"$set":raw},upsert=True)
         return True
+
     def new8th(self):
         return self.blog.find().sort('$natural',-1).limit(7)
     
@@ -28,9 +30,11 @@ class BlogInfo:
     def find(self,url):
         return self.blog.find_one({'url':urllib.request.unquote(url)})
 
+
 class AuthInfo:
     def __init__(self):
         self.authi = db['authInfo']
+        
     def init(self,user,github):
         raw = {
                 "user":user,
@@ -39,9 +43,9 @@ class AuthInfo:
                 }
         self.authi.insert_one(raw)
         return True
+    
     def find_user(self,user):
         return self.authi.find_one({'github':user})
-        
 
 
 class ActiInfo:
@@ -64,7 +68,6 @@ class ActiInfo:
     def remove(self,name):
         self.acti.remove({'name':urllib.request.unquote(name)})
         return True
-
     
     def all(self):
         return self.acti.find()

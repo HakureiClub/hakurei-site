@@ -14,10 +14,19 @@
 	<form id="form" class="createtable">
 		<div>
 			<div class="ui fluid input">
+		{%if blogtitle is 'nopost'  %}
 				<input class="form-control" name="title" type="text" id = "fc-inp">
+		{%else%}
+		<input class="form-control" name="title" type="text" id = "fc-inp" value = "{{blogtitle}}">
+		{%endif%}
 			</div>
 	</br>
 	<textarea id="markdown" class="content" name="content">
+		{%if blogtitle is 'nopost'  %}
+		'請在這邊輸入貼文(記得刪掉本句提示噢！)'
+		{%else%}
+		{{blogcontent}}
+		{%endif%}
 	</textarea> 
 		</div>
 	</form>
@@ -50,7 +59,7 @@
 				{%for blog in blogpost%}
 				<tr>
 					<td>{{loop.index}}</td>
-					<td>{{blog.title}}</td>
+					<td><a href="/admin/editor/{{blog.url}}">{{blog.title}}</td>
 					<td></td>
 				</tr>
 				{%endfor%}
