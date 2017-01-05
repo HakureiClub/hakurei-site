@@ -33,7 +33,7 @@ async def adminindex(request):
 
 
 @admincp.route('/editor')
-async def adminindex(request):
+async def admineditor(request):
     if await login_manger(request) == None:
         blogtitle = 'nopost'
         blogpost = blog.all()
@@ -42,7 +42,7 @@ async def adminindex(request):
 
 
 @admincp.route('/edit/<posted>')
-async def adminindex(request,posted):
+async def adminedit(request,posted):
     if await login_manger(request) == None:
         blogpost = blog.all()
         blogcontent = blog.find(posted)['markdown']
