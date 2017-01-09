@@ -29,15 +29,15 @@ def lm_require(func):
     return wrapper
 
 
-@lm_require
 @admincp.route('/')
+@lm_require
 async def adminindex(request):
     allev = acti.all()        
     return render_template('admin/index.html',**locals())
 
 
-@lm_require
 @admincp.route('/editor')
+@lm_require
 async def admineditor(request):
     blogtitle = 'nopost'
     blogpost = blog.all()
