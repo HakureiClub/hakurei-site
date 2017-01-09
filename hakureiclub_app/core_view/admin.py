@@ -13,9 +13,9 @@ admincp = Blueprint('admincp')
 
 
 def lm_require(func):
-    async def wrapper(request):
-        the_cookie = request.cookies.get('github_login')
-        the_token = request.cookies.get('github_token')
+    async def wrapper(*args, **kwargs):
+        the_cookie = args[0].cookies.get('github_login')
+        the_token = args[0].cookies.get('github_token')
         if not the_cookie == None or not the_token == None :
             code = await getuser.getorg(the_cookie,the_token)
             if not code == 200 : 
