@@ -20,8 +20,6 @@ def lm_require(func):
             code = await getuser.getorg(the_cookie,the_token)
             if not code == 200 : 
                 return text('你沒有權限噢')
-            else:
-                return func(request)
         else:
             res = html('Redirect',status = 302)
             res.headers['Location'] = authit.getGitHubAuth()
@@ -44,8 +42,8 @@ async def admineditor(request):
     return render_template('admin/editor.html',**locals())
 
 
-@lm_require
 @admincp.route('/edit/<posted>')
+@lm_require
 async def adminedit(request,posted):
     blogpost = blog.all()
     blogcontent = blog.find(posted)['markdown']
@@ -53,8 +51,8 @@ async def adminedit(request,posted):
     return render_template('admin/editor.html',**locals())
 
 
-@lm_require
 @admincp.route('/delev/<name>')
+@lm_require
 async def delev(request,name):
     acti.remove(name)
     res = html('Redirect',status = 302)
@@ -62,16 +60,16 @@ async def delev(request,name):
     return res 
     
 
-@lm_require
 @admincp.route('/new-post')
+@lm_require
 async def adminindex(request):
     if request.method == 'POST' :
         title = request.form.get('title')
         blog.init(title,str(request.form.get('markdown')))
         return text('OK')
 
-@lm_require
 @admincp.route('/add_event')
+@lm_require
 async def add_event(request):
     if request.method == 'POST' :
         name = request.form.get('name')
