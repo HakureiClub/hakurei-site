@@ -21,7 +21,7 @@ def lm_require(func):
             if not code == 200 : 
                 return text('你沒有權限噢')
             else:
-                return text(func(request))
+                return await func(request)
         else:
             res = html('Redirect',status = 302)
             res.headers['Location'] = authit.getGitHubAuth()
