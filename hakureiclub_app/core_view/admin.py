@@ -20,6 +20,8 @@ def lm_require(func):
             code = await getuser.getorg(the_cookie,the_token)
             if not code == 200 : 
                 return text('你沒有權限噢')
+            else:
+                pass
         else:
             res = html('Redirect',status = 302)
             res.headers['Location'] = authit.getGitHubAuth()
