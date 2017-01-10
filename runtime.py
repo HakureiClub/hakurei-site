@@ -11,7 +11,8 @@ hakureiclub_app_runapp.blueprint(main)
 hakureiclub_app_runapp.blueprint(admincp, url_prefix='/admin')
 hakureiclub_app_runapp.blueprint(xmlhttp, url_prefix='/xhttp')
 hakureiclub_app_runapp.blueprint(oauthvw, url_prefix='/oauth')
-hakureiclub_app_runapp.static("/static","./%s/core_static" % config.your_app)
+hakureiclub_app_runapp.static("/static", "./%s/core_static" % config.your_app)
 
 if __name__ == "__main__":
-    hakureiclub_app_runapp.run(host="0.0.0.0", debug=True , port=8000,loop=config.loop)
+    hakureiclub_app_runapp.run(
+            host="0.0.0.0", debug=True, port=8000, loop=config.loop)

@@ -6,15 +6,18 @@ xmlhttp = Blueprint('xmlhttp')
 blog = BlogInfo()
 acti = ActiInfo()
 
+
 @xmlhttp.route('/event')
 async def xindex(request):
     newest = acti.newest()
     blog8th = blog.new8th()
-    return render_template('xmlhttp/index.html',**locals())
+    return render_template('xmlhttp/index.html', **locals())
+
 
 @xmlhttp.route('/member')
 async def member(request):
     return render_template('xmlhttp/member.html')
+
 
 @xmlhttp.route('/illust')
 async def illust(request):
