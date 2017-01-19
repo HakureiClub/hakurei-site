@@ -12,6 +12,8 @@ hakureiclub_app_runapp.blueprint(admincp, url_prefix='/admin')
 hakureiclub_app_runapp.blueprint(xmlhttp, url_prefix='/xhttp')
 hakureiclub_app_runapp.blueprint(oauthvw, url_prefix='/oauth')
 hakureiclub_app_runapp.static("/static", "./%s/core_static" % config.your_app)
+hakureiclub_app_runapp.static(
+        "/preview", "./%s/core_lfs/img" % config.your_app)
 
 if __name__ == "__main__":
     hakureiclub_app_runapp.run(
